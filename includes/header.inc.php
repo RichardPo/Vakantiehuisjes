@@ -4,3 +4,4 @@
     </head>
     
     <body>
+        <?php include "includes/conn.inc.php"; ?>
