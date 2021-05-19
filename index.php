@@ -1,5 +1,7 @@
-<?php include "includes/header.inc.php"; ?>
+<?php
 
-<p>This is a test.</p>
+    require "Router.php";
 
-<?php include "includes/footer.inc.php"; ?>
+    $router = new Router($_SERVER['REQUEST_URI']);
+
+?>
