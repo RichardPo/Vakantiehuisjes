@@ -20,7 +20,7 @@ body {
     justify-content: center;
 }
 
-.background {
+.banner {
     width: 100%;
     height: 40%;
     background-image: url(https://cdn.pling.com/img/c/b/b/1/fde71ca72ef854432333eb8fad3ff1e15e35.jpg);
@@ -42,6 +42,10 @@ body {
     float: right;
     width: 80px;
     height: 80px;
+}
+
+.menu-bars i {
+    font-size: 25px;
 }
 
 .logo {
@@ -112,11 +116,55 @@ input[type="submit"] {
     bottom: 0;
 }
 
-.black {
+.overlay {
+    position: fixed;
     background-color: black;
-    color: white;
+    z-index: 60;
+    width: 100vh;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-.black input {
-    border-color: white;
+.side-menu {
+    position: fixed;
+    max-width: 100%;
+    height: 100vh;
+    z-index: 70;
+    background-color: white;
+    min-width: 50%;
+    transition: left 0.3s ease;
+}
+
+.side-menu-header {
+    width: 100%;
+    height: 80px;
+}
+
+.cross {
+    width: 80px;
+    height: 80px;
+    float: right;
+}
+
+.cross i {
+    font-size: 25px;
+}
+
+.side-menu-main {
+    width: 100%;
+    height: calc(100% - 80px);
+    box-sizing: border-box;
+    padding: 0px 20px 0px 20px;
+}
+
+.menu-item {
+    width: 100%;
+    margin: 20px 0px 20px 0px;
+    text-align: center;
+}
+
+.menu-item a {
+    text-decoration: none;
+    color: black;
 }

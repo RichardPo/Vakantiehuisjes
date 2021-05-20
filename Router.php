@@ -5,16 +5,21 @@
         private $controller;
 
         private $routes = [
+            "" => "HomeController",
             "home" => "HomeController"
         ];
 
         public function __construct($url)
         {
-            $route = $this->routes[$this->ParseUrl($url)];
+            $key = $this->ParseUrl($url);
+            if(array_key_exists($key, $this->routes)) {
+                $route = $this->routes[$key];
 
-            require "Controllers/" . $route . ".php";
-
-            $this->controller = new $route();
+                require "Controllers/" . $route . ".php";
+                $this->controller = new $route();
+            } else {
+                echo "Page not found.";
+            }
         }
 
         private function ParseUrl($url) {

@@ -11,7 +11,7 @@
         {
             $this->house = new House();
 
-            $this->data["houses"] = $this->house->GetAll();
+            $this->data["title"] = "Home";
 
             $this->view = "Home.php";
             $this->RenderView();
