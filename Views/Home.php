@@ -1,15 +1,15 @@
 <?php include "Resources/Includes/header.inc.php"; ?>
 
-<div class="main">
+<div class="main" style="top: 40%;">
     <div class="block">
         <div class="block-header">
             Welkom!
         </div>
         <div class="block-main">
             Zoek hier de perfecte accomodatie voor je vakantie:<br>
-            <form>
-                <input type="text" name="accomodation_name" placeholder="Naam van accomodatie..."/>
-                <input type="submit" value="Zoeken"/>
+            <form action="search" method="get">
+                <input type="text" name="accomodation_name" placeholder="Naam van accomodatie..." />
+                <input type="submit" value="Zoeken" />
             </form>
         </div>
     </div>
@@ -19,12 +19,12 @@
             Of zoek met filters
         </div>
         <div class="block-main">
-            <form>
+            <form action="search" method="get">
                 <label>Wanneer ga je?</label>
-                <input type="date" name="date"/>
+                <input type="date" name="date" />
                 <label>En met hoeveel personen?</label>
-                <input type="number" name="amount"/>
-                <input type="submit" value="Zoeken"/>
+                <input type="number" name="amount" />
+                <input type="submit" value="Zoeken" />
             </form>
         </div>
     </div>

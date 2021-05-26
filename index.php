@@ -1,7 +1,5 @@
 <?php
 
-    require "Router.php";
+require "Router.php";
 
-    $router = new Router($_SERVER['REQUEST_URI']);
-
-?>
+$router = new Router($_SERVER['REQUEST_URI']);

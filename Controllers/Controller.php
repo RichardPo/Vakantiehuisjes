@@ -1,13 +1,13 @@
 <?php
 
-    class Controller {
-        protected $view;
-        protected $data = [];
+class Controller
+{
+    protected $view;
+    protected $data = [];
 
-        public function RenderView() {
-            extract($this->data);
-            require "Views/" . $this->view;
-        }
+    public function RenderView()
+    {
+        extract($this->data);
+        require "Views/" . $this->view;
     }
-
-?>
+}

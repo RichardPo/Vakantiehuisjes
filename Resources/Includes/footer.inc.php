@@ -1,3 +1,4 @@
-        <script src="Resources/JS/side-menu.js"></script>
-    </body>
+<script src="Resources/JS/side-menu.js"></script>
+</body>
+
 </html>

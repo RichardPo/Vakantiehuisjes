@@ -22,7 +22,7 @@ body {
 
 .banner {
     width: 100%;
-    height: 40%;
+    height: 20%;
     background-image: url(https://cdn.pling.com/img/c/b/b/1/fde71ca72ef854432333eb8fad3ff1e15e35.jpg);
     background-position: center;
     background-size: cover;
@@ -61,7 +61,7 @@ body {
     position: relative;
     z-index: 50;
     box-sizing: border-box;
-    top: 40%;
+    top: 20%;
     position: absolute;
     padding: 20px;
 }
@@ -120,7 +120,7 @@ input[type="submit"] {
     position: fixed;
     background-color: black;
     z-index: 60;
-    width: 100vh;
+    width: 100vw;
     height: 100%;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -167,4 +167,60 @@ input[type="submit"] {
 .menu-item a {
     text-decoration: none;
     color: black;
+}
+
+h1 {
+    font-size: 20px;
+}
+
+.houses {
+    margin-top: 20px;
+}
+
+.house:last-child {
+    border-bottom: 1px solid lightgrey;
+}
+
+.house {
+    width: 100%;
+    height: fit-content;
+    min-height: 80px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-top: 1px solid lightgrey;
+}
+
+.house .picture {
+    float: left;
+    height: 60px;
+    width: 60px;
+    background-color: lightgrey;
+}
+
+.house .text {
+    margin-left: 80px;
+    width: calc(100% - 80px);
+}
+
+.house-title {
+    font-size: 18px;
+}
+
+.house-persons {
+    float: right;
+}
+
+.house-persons i {
+    font-size: 15px;
+    color: #404040;
+}
+
+.house-main {
+    margin-top: 5px;
+    width: 100%;
+}
+
+.house-description {
+    overflow-x: hidden;
+    font-size: 12px;
 }

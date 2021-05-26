@@ -1,21 +1,14 @@
 <?php
 
-    require "Controllers/Controller.php";
-    require "Models/House.php";
+require "Controllers/Controller.php";
 
-    class HomeController extends Controller 
+class HomeController extends Controller
+{
+    public function __construct()
     {
-        private $house;
+        $this->data["title"] = "Home";
 
-        public function __construct()
-        {
-            $this->house = new House();
-
-            $this->data["title"] = "Home";
-
-            $this->view = "Home.php";
-            $this->RenderView();
-        }
+        $this->view = "Home.php";
+        $this->RenderView();
     }
-
-?>
+}
