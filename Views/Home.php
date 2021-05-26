@@ -1,6 +1,6 @@
 <?php include "Resources/Includes/header.inc.php"; ?>
 
-<div class="main" style="top: 40%;">
+<div class="main home">
     <div class="block">
         <div class="block-header">
             Welkom!

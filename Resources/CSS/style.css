@@ -12,12 +12,17 @@ body {
 * {
     font-family: century gothic;
     font-size: 15px;
+    transition: all 0.4s ease;
 }
 
 .center {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.hidden {
+    display: none;
 }
 
 .banner {
@@ -28,6 +33,10 @@ body {
     background-size: cover;
     position: absolute;
     top: 0;
+}
+
+.banner.home {
+    height: 40%;
 }
 
 .header {
@@ -48,6 +57,27 @@ body {
     font-size: 25px;
 }
 
+.menu {
+    height: 100%;
+    padding: 0px 20px 0px 20px;
+    float: right;
+}
+
+.m-item {
+    float: left;
+    padding: 15px 20px 15px 20px;
+    background-color: #a680d1; /** Maybe #7951a7 or #b189df? **/
+    border-radius: 150px;
+    margin: 0px 10px 0px 10px;
+    opacity: 0.9;
+}
+
+.menu a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+}
+
 .logo {
     float: left;
     height: 80px;
@@ -64,6 +94,10 @@ body {
     top: 20%;
     position: absolute;
     padding: 20px;
+}
+
+.main.home {
+    top: 40%;
 }
 
 .block {
@@ -223,4 +257,32 @@ h1 {
 .house-description {
     overflow-x: hidden;
     font-size: 12px;
+}
+
+@media only screen and (min-width: 900px) {
+    .banner {
+        height: 80px;
+    }
+
+    .main {
+        top: 80px;
+        width: 70%;
+        margin-left: 15%;
+    }
+    
+    .banner.home {
+        height: 80%;
+    }
+
+    .main.home {
+        top: 80%;
+    }
+
+    .curve {
+        display: none;
+    }
+
+    input {
+        border-radius: 5px;
+    }
 }
