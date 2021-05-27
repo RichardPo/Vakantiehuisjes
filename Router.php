@@ -7,7 +7,8 @@ class Router
     private $routes = [
         "" => "HomeController",
         "home" => "HomeController",
-        "search" => "SearchController"
+        "search" => "SearchController",
+        "account" => "AccountController"
     ];
 
     public function __construct($url)

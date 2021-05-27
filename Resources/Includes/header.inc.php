@@ -35,11 +35,12 @@
         <div class="logo center">Huisjes.nl</div>
         <div class="menu-bars center" onclick="OpenSideMenu()"><i class="fas fa-bars"></i></div>
         <div class="menu center">
-            <a href="home">
-                <div class="m-item">Home</div>
-            </a>
-            <a href="accommodations">
-                <div class="m-item">Accommodaties</div>
-            </a>
+            <div class="m-item"><a href="home">Home</a></div>
+            <div class="m-item"><a href="accommodations">Accommodaties</a></div>
+            <div class="m-item">
+                <a href="account">
+                    <div class="pf center"><i class="fas fa-user"></i></div>
+                </a>
+            </div>
         </div>
     </div>
