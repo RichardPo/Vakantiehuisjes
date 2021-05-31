@@ -14,7 +14,7 @@
         </div>
     </div>
 
-    <div class="block black">
+    <div class="block">
         <div class="block-header">
             Of zoek met filters
         </div>

@@ -2,12 +2,17 @@
 
 <div class="main center">
     <form action="" method="post">
-        <h1>Inloggen</h1>
+        <h1>Registreren</h1>
         <label>Gebruikersnaam</label>
         <input type="text" name="username" />
         <label>Wachtwoord</label>
         <input type="password" name="password" />
-        <input type="submit" name="login" value="Inloggen" /><br>
+        <label>Rol</label>
+        <select name="role">
+            <option value="bezoeker">Bezoeker / huurder</option>
+            <option value="verhuurder">Verhuurder</option>
+        </select>
+        <input type="submit" name="register" value="Inloggen" /><br>
         <?= isset($message) ? $message : "" ?>
     </form>
 </div>

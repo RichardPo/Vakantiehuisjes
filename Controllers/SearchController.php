@@ -1,6 +1,5 @@
 <?php
 
-require "Controllers/Controller.php";
 require "Models/House.php";
 
 class SearchController extends Controller

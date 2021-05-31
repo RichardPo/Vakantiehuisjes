@@ -1,7 +1,5 @@
 <?php
 
-require "Models/Model.php";
-
 class House extends Model
 {
     public function GetAll()

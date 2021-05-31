@@ -1,5 +1,8 @@
 <?php
 
+require "Models/Model.php";
+require "Controllers/Controller.php";
+
 class Router
 {
     private $controller;
@@ -27,7 +30,7 @@ class Router
     private function ParseUrl($url)
     {
         $urlParts = explode("/", $url);
-        $pageWithParameters = $urlParts[2];
+        $pageWithParameters = $urlParts[count($urlParts) - 1];
         $page = explode("?", $pageWithParameters)[0];
 
         return $page;
