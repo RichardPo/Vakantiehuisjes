@@ -23,21 +23,21 @@
         <form action="" method="post">
             <h1>Account bewerken</h1>
             <label>Volledige naam</label>
-            <input type="text" name="name" />
+            <input type="text" name="name" value='<?= isset($userInfo["name"]) ? $userInfo["name"] : "" ?>' />
             <label>E-mail</label>
-            <input type="email" name="email" />
+            <input type="email" name="email" value='<?= isset($userInfo["email"]) ? $userInfo["email"] : "" ?>' />
             <label>Telefoonnummer</label>
-            <input type="text" name="phone" />
+            <input type="text" name="phone" value='<?= isset($userInfo["phone"]) ? $userInfo["phone"] : "" ?>' />
             <label>Geboortedatum</label>
-            <input type="date" name="birthday" />
+            <input type="date" name="birthday" value='<?= isset($userInfo["birthday"]) ? $userInfo["birthday"] : "" ?>' />
             <label>Land</label>
-            <input type="text" name="country" />
+            <input type="text" name="country" value='<?= isset($userInfo["country"]) ? $userInfo["country"] : "" ?>' />
             <label>Woonplaats</label>
-            <input type="text" name="city" />
+            <input type="text" name="city" value='<?= isset($userInfo["city"]) ? $userInfo["city"] : "" ?>' />
             <label>Straat</label>
-            <input type="text" name="street" />
+            <input type="text" name="street" value='<?= isset($userInfo["street"]) ? $userInfo["street"] : "" ?>' />
             <label>Postcode</label>
-            <input type="text" name="postal_code" />
+            <input type="text" name="postal_code" value='<?= isset($userInfo["postal_code"]) ? $userInfo["postal_code"] : "" ?>' />
 
             <input type="submit" name="editInfo" value="Verzenden" /><br>
             <?= isset($accountMessage) ? $accountMessage : "" ?>

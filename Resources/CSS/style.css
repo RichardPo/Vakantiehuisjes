@@ -10,7 +10,7 @@ body {
 }
 
 * {
-    font-family: century gothic;
+    font-family: Open Sans;
     font-size: 15px;
     transition: all 0.3s ease;
 }
@@ -121,7 +121,7 @@ body {
 }
 
 form {
-    margin-top: 20px;
+    margin: 20px 0px 0px 0px;
     width: 100%;
 }
 
@@ -141,9 +141,14 @@ input, select, button {
 }
 
 input[type="submit"], button {
-    background: rgb(149 31 224);
+    background: rgb(149, 31, 224);
     color: white;
     border: none;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover, button:hover {
+    background: rgb(131, 40, 187);
 }
 
 .curve {
@@ -215,6 +220,11 @@ h1 {
     width: 100%;
 }
 
+.houses a {
+    text-decoration: none;
+    color: black;
+}
+
 .house:last-child {
     border-bottom: 1px solid lightgrey;
 }
@@ -226,6 +236,7 @@ h1 {
     padding: 10px;
     box-sizing: border-box;
     border-top: 1px solid lightgrey;
+    cursor: pointer;
 }
 
 .house .picture {
@@ -233,6 +244,8 @@ h1 {
     height: 60px;
     width: 60px;
     background-color: lightgrey;
+    background-position: center;
+    background-size: cover;
 }
 
 .house .text {
@@ -273,6 +286,17 @@ h1 {
 .pf i {
     color: black;
     font-size: 18px;
+}
+
+.slideshow {
+    width: 100%;
+    height: 70%;
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+    background-color: grey;
 }
 
 @media only screen and (min-width: 900px) {

@@ -30,4 +30,14 @@ class Model
             return false;
         }
     }
+
+    public function GetError()
+    {
+        return mysqli_error($this->connection);
+    }
+
+    protected function ValidateInput($input)
+    {
+        return mysqli_real_escape_string($this->connection, $input);
+    }
 }

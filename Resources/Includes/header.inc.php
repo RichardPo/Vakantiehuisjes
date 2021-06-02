@@ -7,6 +7,9 @@
 
     <script src="https://kit.fontawesome.com/e5272abace.js" crossorigin="anonymous"></script>
 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+
     <link href="Resources/CSS/style.css?time=<?= time(); ?>" rel="stylesheet" type="text/css" />
 </head>
 
@@ -20,6 +23,7 @@
         <div class="side-menu-main">
             <div class="menu-item"><a href="home">Home</a></div>
             <div class="menu-item"><a href="accommodations">Accommodaties</a></div>
+            <div class="menu-item"><a href="account">Account</a></div>
         </div>
     </div>
 

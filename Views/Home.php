@@ -6,9 +6,9 @@
             Welkom!
         </div>
         <div class="block-main">
-            Zoek hier de perfecte accomodatie voor je vakantie:<br>
+            Zoek hier de perfecte accommodatie voor je vakantie:<br>
             <form action="search" method="get">
-                <input type="text" name="accomodation_name" placeholder="Naam van accomodatie..." />
+                <input type="text" name="accommodation_name" placeholder="Naam van accommodatie..." />
                 <input type="submit" value="Zoeken" />
             </form>
         </div>

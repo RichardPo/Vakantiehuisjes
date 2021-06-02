@@ -7,13 +7,15 @@ class User extends Model
         return $this->MakeArray($this->Query("SELECT * FROM users"));
     }
 
-    public function GetAllByID($id)
+    public function GetUserById($id)
     {
+        $id = $this->ValidateInput($id);
         return $this->MakeArray($this->Query("SELECT * FROM users WHERE id='$id'"));
     }
 
     public function GetUserByUsername($username)
     {
+        $username = $this->ValidateInput($username);
         $users = $this->MakeArray($this->Query("SELECT * FROM users WHERE username='$username'"));
         if (count($users) > 0) {
             return $users[0];
@@ -24,6 +26,7 @@ class User extends Model
 
     public function GetUserInfoByID($id)
     {
+        $id = $this->ValidateInput($id);
         $userInfos = $this->MakeArray($this->Query("SELECT * FROM user_info WHERE user_id='$id'"));
         if (count($userInfos) > 0) {
             return $userInfos[0];
@@ -34,6 +37,13 @@ class User extends Model
 
     public function CheckUserCredentials($username, $password)
     {
+        if (empty($username) || empty($password)) {
+            return false;
+        }
+
+        $username = $this->ValidateInput($username);
+        $password = $this->ValidateInput($password);
+
         $foundUsers = $this->MakeArray($this->Query("SELECT * FROM users WHERE username='$username'"));
         if (count($foundUsers) > 0) {
             $user = $foundUsers[0];
@@ -65,6 +75,14 @@ class User extends Model
 
     public function CreateUser($username, $password, $role)
     {
+        if (empty($username) || empty($password) || empty($role)) {
+            return false;
+        }
+
+        $username = $this->ValidateInput($username);
+        $password = $this->ValidateInput($password);
+        $role = $this->ValidateInput($role);
+
         $pass = hash("sha256", $password);
 
         $usersWithUsername = $this->Query("SELECT * FROM users WHERE username='$username'");
@@ -77,6 +95,15 @@ class User extends Model
 
     public function EditUserWithId($id, $newUsername, $newPassword, $newRole)
     {
+        if (empty($id) || empty($newUsername) || empty($newPassword) || empty($newRole)) {
+            return false;
+        }
+
+        $id = $this->ValidateInput($id);
+        $newUsername = $this->ValidateInput($newUsername);
+        $newPassword = $this->ValidateInput($newPassword);
+        $newRole = $this->ValidateInput($newRole);
+
         $pass = hash("sha256", $newPassword);
 
         $usersWithUsername = $this->Query("SELECT * FROM users WHERE username='$newUsername'");
@@ -89,9 +116,19 @@ class User extends Model
 
     public function EditUserInfoWithUserId($id, $name, $email, $phone, $birthday, $country, $city, $street, $postalCode)
     {
+        $id = $this->ValidateInput($id);
+        $name = $this->ValidateInput($name);
+        $email = $this->ValidateInput($email);
+        $phone = $this->ValidateInput($phone);
+        $birthday = $this->ValidateInput($birthday);
+        $country = $this->ValidateInput($country);
+        $city = $this->ValidateInput($city);
+        $street = $this->ValidateInput($street);
+        $postalCode = $this->ValidateInput($postalCode);
+
         $userInfos = $this->Query("SELECT * FROM user_info WHERE user_id='$id'");
         if (mysqli_num_rows($userInfos) > 0) {
-            return $this->Query("UPDATE user_info SET name='$name', email='$email', birthdate='$birthday', phone='$phone', country='$country', city='$city', street='$street', postal_code='$postalCode' WHERE user_id='$id'");
+            return $this->Query("UPDATE user_info SET name='$name', email='$email', birthday='$birthday', phone='$phone', country='$country', city='$city', street='$street', postal_code='$postalCode' WHERE user_id='$id'");
         } else {
             return $this->Query("INSERT INTO user_info (name, email, phone, birthday, country, city, street, postal_code, user_id) VALUES ('$name', '$email', '$phone', '$birthday', '$country', '$city', '$street', '$postalCode', '$id')");
         }

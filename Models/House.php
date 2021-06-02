@@ -14,6 +14,6 @@ class House extends Model
 
     public function GetAllByTitle($name)
     {
-        return $this->MakeArray($this->Query("SELECT * FROM houses WHERE title='$name'"));
+        return $this->MakeArray($this->Query("SELECT * FROM houses WHERE title LIKE '%$name%'"));
     }
 }
