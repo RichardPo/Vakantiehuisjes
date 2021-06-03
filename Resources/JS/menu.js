@@ -1,15 +1,9 @@
 var menuBars = document.querySelector(".menu-bars");
 var menu = document.querySelector(".menu");
 
-window.onresize = function () {
-    UpdateMenu();
-}
-
-window.onload = function () {
-    UpdateMenu();
-}
-
 function UpdateMenu() {
+    console.log("Hoi");
+
     if (document.body.clientWidth >= 900) {
         menuBars.classList.add("hidden");
         menu.classList.remove("hidden");

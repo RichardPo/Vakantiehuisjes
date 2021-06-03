@@ -12,7 +12,6 @@ body {
 * {
     font-family: Open Sans;
     font-size: 15px;
-    transition: all 0.3s ease;
 }
 
 .center {
@@ -145,10 +144,11 @@ input[type="submit"], button {
     color: white;
     border: none;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 input[type="submit"]:hover, button:hover {
-    background: rgb(131, 40, 187);
+    background-color: rgb(131, 40, 187);
 }
 
 .curve {
@@ -288,40 +288,114 @@ h1 {
     font-size: 18px;
 }
 
-.slideshow {
-    width: 100%;
-    height: 70%;
+.accommodation-title {
+    font-size: 30px;
+    margin: 30px 0px 45px 0px;
 }
 
-.slide {
+.slideshow-container, .slideshow-container * {
+    box-sizing: border-box;
+}
+
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+.mySlides {
+    display: none;
+}
+
+.img {
     width: 100%;
-    height: 100%;
-    background-color: grey;
+    aspect-ratio: 1920 / 1080;
+    background-size: cover;
+    background-position: center;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+    background-color: #717171;
+}
+
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
 }
 
 @media only screen and (min-width: 900px) {
     .banner {
         height: 80px;
     }
-
     .main {
         top: 80px;
         width: 70%;
         margin-left: 15%;
     }
-    
     .banner.home {
         height: 80%;
     }
-
     .main.home {
         top: 80%;
     }
-
     .curve {
         display: none;
     }
-
     input[type="submit"], button {
         width: fit-content;
     }
