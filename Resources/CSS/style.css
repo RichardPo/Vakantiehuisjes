@@ -225,7 +225,7 @@ h1 {
     color: black;
 }
 
-.house:last-child {
+.houses:last-child {
     border-bottom: 1px solid lightgrey;
 }
 
