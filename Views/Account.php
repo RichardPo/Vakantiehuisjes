@@ -28,9 +28,17 @@
 
             foreach ($reviews as $review) :
             ?>
-                <div class="account-review">
-                    <?= $review["title"]; ?>
+
+                <div class="review">
+                    <div class="review-title">
+                        <?= $review["title"]; ?>
+                    </div>
+                    <div class="review-main">
+                        <i class="fas fa-star"></i> <?= $review["rating"]; ?><br>
+                        <?= $review["review"] ?>
+                    </div>
                 </div>
+
             <?php endforeach; ?>
         </div>
     </div>
