@@ -42,6 +42,31 @@
             <?php endforeach; ?>
         </div>
     </div>
+
+    <div class="block">
+        <div class="block-header">Mijn bookingen</div>
+        <div class="block-main">
+            <?php
+            if (count($bookings) == 0) {
+                echo "Je hebt nog geen accommodaties gebookt.";
+            }
+
+            foreach ($bookings as $booking) :
+            ?>
+
+                <div class="booking">
+                    <div class="booking-title">
+                        <?= $booking["title"]; ?>
+                    </div>
+                    <div class="booking-main">
+                        <i class="fas fa-info-circle"></i> <?= $booking["status"] ?><br>
+                        <?= $booking["start_date"] . " tot " . $booking["end_date"] ?>
+                    </div>
+                </div>
+
+            <?php endforeach; ?>
+        </div>
+    </div>
 </div>
 
 <?php include "Resources/Includes/footer.inc.php"; ?>

@@ -64,19 +64,21 @@
         </div>
         <div class="block-main">
             <form method="POST">
-                <label>Naam</label>
-                <input type="text" name="name" />
-                <label>E-mail</label>
-                <input type="email" name="email" />
-                <label>Telefoonnummer</label>
-                <input type="text" name="phone" />
                 <label>Aantal personen</label>
                 <input type="number" name="numberOfPersons" />
+
                 <label>Van (datum)</label>
                 <input type="date" name="fromDate" />
+
                 <label>Tot (datum)</label>
                 <input type="date" name="toDate" />
-                <input type="submit" name="book" value="Boeken" />
+
+                <label>Opmerkingen</label>
+                <textarea name="remarks"></textarea>
+
+                <input type="submit" name="book" value="Boeken" /><br>
+
+                <?= empty($message) ? "" : $message ?>
             </form>
         </div>
     </div>
@@ -89,11 +91,15 @@
             <form method="POST">
                 <label>Titel</label>
                 <input type="text" name="title" />
+
                 <label>Rating (1-5)</label>
                 <input type="number" name="rating" min="1" max="5" />
+
                 <label>Review</label>
                 <textarea name="main"></textarea>
+
                 <input type="submit" name="review" value="Posten" /><br>
+
                 <?= empty($message) ? "" : $message ?>
             </form>
         </div>

@@ -12,7 +12,7 @@
         ?>
             <a href="accommodation?id=<?= $house['id'] ?>">
                 <div class="house">
-                    <div class="picture" style="background-image: url(https://static.ferienhausmiete.de/pictures/132225/bilder_original/132225_47046835491551.jpg);"></div>
+                    <div class="picture" style="background-image: url(<?= $house['pictureURL'] ?>);"></div>
                     <div class="text">
                         <div class="house-header">
                             <div class="house-title"><?= $house["title"]; ?></div>

@@ -24,6 +24,8 @@ class Review extends Model
         $title = $this->ValidateInput($title);
         $review = $this->ValidateInput($review);
 
+        $rating = max(0, min(5, $rating));
+
         return $this->Query("INSERT INTO reviews (rating, title, review, house_id, user_id) VALUES ('$rating', '$title', '$review', '$houseId', '$userId')");
     }
 }

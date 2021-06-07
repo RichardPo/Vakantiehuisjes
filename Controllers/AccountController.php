@@ -2,16 +2,19 @@
 
 require "Models/User.php";
 require "Models/Review.php";
+require "Models/Booking.php";
 
 class AccountController extends Controller
 {
     private $user;
     private $review;
+    private $booking;
 
     public function __construct()
     {
         $this->user = new User();
         $this->review = new Review();
+        $this->booking = new Booking();
 
         if ($this->user->GetCurrentUser() == null) {
             if (isset($_POST["register"])) {
@@ -42,8 +45,11 @@ class AccountController extends Controller
                 $this->view = "Account.php";
                 $this->data["title"] = "Account";
 
-                $this->data["reviews"] = $this->review->GetAllByUserId($this->user->GetCurrentUser()["id"]);
-                $this->data["userInfo"] = $this->user->GetUserInfoByID($this->user->GetCurrentUser()["id"]);
+                $userId = $this->user->GetCurrentUser()["id"];
+
+                $this->data["reviews"] = $this->review->GetAllByUserId($userId);
+                $this->data["userInfo"] = $this->user->GetUserInfoByID($userId);
+                $this->data["bookings"] = $this->booking->GetAllBookingsByUserId($userId);
             }
         }
 

@@ -384,24 +384,24 @@ h1 {
     }
 }
 
-.review:last-child {
+.review:last-child, .booking:last-child {
     border-bottom: 1px solid lightgrey;
 }
 
-.review {
+.review, .booking {
     border-top: 1px solid lightgrey;
     padding: 10px 0px 10px 0px;
 }
 
-.review-title {
+.review-title, .booking-title {
     margin-bottom: 5px;
 }
 
-.review-main {
+.review-main, .booking-main {
     font-size: 12px;
 }
 
-.review-main i {
+.review-main i, .booking-main i {
     color: #404040;
 }
 
