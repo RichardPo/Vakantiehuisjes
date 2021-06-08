@@ -33,4 +33,57 @@ class Booking extends Model
 
         return $userBookings;
     }
+
+    public function GetAllBookingsByHouseId($id)
+    {
+        $id = $this->ValidateInput($id);
+
+        $bookings = $this->GetAllBookings();
+
+        $houseBookings = [];
+        foreach ($bookings as $booking) {
+            if ($booking["house_id"] == $id) {
+                array_push($houseBookings, $booking);
+            }
+        }
+
+        return $houseBookings;
+    }
+
+    public function GetAllAcceptedBookingsByHouseId($id)
+    {
+        $bookings = $this->GetAllBookingsByHouseId($id);
+
+        $acceptedBookings = [];
+        foreach ($bookings as $booking) {
+            if ($booking["status"] == "Goedgekeurd") {
+                array_push($acceptedBookings, $booking);
+            }
+        }
+
+        return $acceptedBookings;
+    }
+
+    public function IsGivenDateOverlappingWithBookingByHouseId($date, $houseId)
+    {
+        $date = $this->ValidateInput($date);
+
+        $houseBookings = $this->GetAllAcceptedBookingsByHouseId($houseId);
+        if (count($houseBookings) > 0) {
+            $date = date("Y-m-d", strToTime($date));
+
+            foreach ($houseBookings as $booking) {
+                $startDate = date("Y-m-d", strToTime($booking["start_date"]));
+                $endDate = date("Y-m-d", strToTime($booking["end_date"]));
+
+                if (($date >= $startDate) && ($date <= $endDate)) {
+                    return true;
+                }
+            }
+
+            return false;
+        } else {
+            return false;
+        }
+    }
 }

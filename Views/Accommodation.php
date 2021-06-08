@@ -52,7 +52,7 @@
         <div class="block-main">
             Type: <?= $house["type"]; ?><br>
             Aantal personen: <?= $house["capacity"]; ?><br>
-            Prijs per nacht: € <?= $house["price"]; ?><br>
+            P.p.p.n.: € <?= $house["price"]; ?><br>
             Land: <?= $house["country"]; ?><br>
             Stad: <?= $house["city"]; ?>
         </div>

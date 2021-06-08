@@ -27,7 +27,7 @@ class Model
             }
             return $list;
         } else {
-            return false;
+            return [];
         }
     }
 

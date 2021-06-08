@@ -311,13 +311,15 @@ h1 {
 
 .mySlides {
     display: none;
+    overflow: hidden;
 }
 
-.img {
+.mySlides .img {
     width: 100%;
     aspect-ratio: 1920 / 1080;
     background-size: cover;
     background-position: center;
+    transition: transform 0.3s ease;
 }
 
 .prev, .next {
@@ -425,5 +427,8 @@ h1 {
     }
     input[type="submit"], button {
         width: fit-content;
+    }
+    .mySlides:hover .img {
+        transform: scale(1.1);
     }
 }

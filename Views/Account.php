@@ -15,6 +15,10 @@
             <form>
                 <button type="submit" name="edit" value="true">Account bewerken</button>
             </form>
+
+            <form>
+                <button type="submit" name="logout" value="true">Uitloggen</button>
+            </form>
         </div>
     </div>
 
