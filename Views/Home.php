@@ -21,8 +21,12 @@
         <div class="block-main">
             <form action="search" method="get">
                 <label>Wanneer ga je?</label>
-                <input type="date" name="date" />
+                <input type="date" name="startDate" />
+
+                <label>Tot wanneer?</label>
+                <input type="date" name="endDate" />
                 <label>En met hoeveel personen?</label>
+
                 <input type="number" name="amount" />
                 <input type="submit" value="Zoeken" />
             </form>

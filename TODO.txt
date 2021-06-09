@@ -1,3 +1,2 @@
-1. Verify that users can only book accommodations for their own account.
-2. Verify that users can only change user-info and user-credentials for their own account.
-3. Verify that users can only post reviews from their own account.
+1. Make sure users can not book a accommodation which has already a overlapping, accepted booking.
+2. Make sure user can only write reviews when they visited a accommodation earlier.

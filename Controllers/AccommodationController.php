@@ -19,8 +19,8 @@ class AccommodationController extends Controller
 
         if (isset($_GET["accommodation_name"])) {
             $accommodations = $this->house->GetAllByTitle($_GET["accommodation_name"]);
-        } else if (isset($_GET["date"]) && isset($_GET["amount"])) {
-            $accommodations = $this->GetAvailableAccommodations();
+        } else if (isset($_GET["startDate"]) && isset($_GET["endDate"]) && isset($_GET["amount"])) {
+            $accommodations = $this->house->GetAvailableHouses($_GET["amount"], $_GET["startDate"], $_GET["endDate"]);
         } else {
             $accommodations = $this->house->GetAll();
         }
@@ -44,20 +44,5 @@ class AccommodationController extends Controller
 
         $this->view = "Accommodations.php";
         $this->RenderView();
-    }
-
-    private function GetAvailableAccommodations()
-    {
-        $foundHousesByCapacity = $this->house->GetAllAvailableHousesByCapacity($_GET["amount"]);
-
-        $availableHouses = [];
-
-        foreach ($foundHousesByCapacity as $house) {
-            if ($this->booking->IsGivenDateOverlappingWithBookingByHouseId($_GET["date"], $house["id"]) == false) {
-                array_push($availableHouses, $house);
-            }
-        }
-
-        return $availableHouses;
     }
 }

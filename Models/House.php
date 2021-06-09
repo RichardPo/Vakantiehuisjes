@@ -28,10 +28,35 @@ class House extends Model
         return $this->MakeArray($this->Query("SELECT * FROM files WHERE house_id='$id'"));
     }
 
-    public function GetAllAvailableHousesByCapacity($maxCapacity)
+    public function GetAvailableHouses($capacity, $startDate, $endDate)
     {
-        $maxCapacity = $this->ValidateInput($maxCapacity);
+        $capacity = $this->ValidateInput($capacity);
+        $startDate = $this->ValidateInput($startDate);
+        $endDate = $this->ValidateInput($endDate);
 
-        return $this->MakeArray($this->Query("SELECT * FROM houses WHERE capacity <= $maxCapacity"));
+        $houses = $this->MakeArray($this->Query("SELECT * FROM houses WHERE capacity >= '$capacity'"));
+        $availableHouses = [];
+
+        foreach ($houses as $house) {
+            $houseId = $house["id"];
+
+            $bookings = $this->MakeArray($this->Query("SELECT * FROM bookings WHERE house_id='$houseId' AND status='Goedgekeurd'"));
+            $hasOverlappingBooking = false;
+
+            foreach ($bookings as $booking) {
+                $bookingStartDate = date("Y-m-d", strtotime($booking["start_date"]));
+                $bookingEndDate = date("Y-m-d", strtotime($booking["end_date"]));
+
+                if ((($startDate > $bookingStartDate) && ($startDate < $bookingEndDate)) || (($endDate > $bookingStartDate) && ($endDate < $bookingEndDate))) {
+                    $hasOverlappingBooking = true;
+                }
+            }
+
+            if (!$hasOverlappingBooking) {
+                array_push($availableHouses, $house);
+            }
+        }
+
+        return $availableHouses;
     }
 }
