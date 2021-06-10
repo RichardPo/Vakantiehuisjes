@@ -1,2 +1,1 @@
-1. Make sure users can not book a accommodation which has already a overlapping, accepted booking.
-2. Make sure user can only write reviews when they visited a accommodation earlier.
+1. Make sure user can only write reviews when they visited a accommodation earlier (in real life).

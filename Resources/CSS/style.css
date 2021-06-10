@@ -229,9 +229,10 @@ h1 {
 .houses a {
     text-decoration: none;
     color: black;
+    display: block;
 }
 
-.houses:last-child {
+.houses a:last-child {
     border-bottom: 1px solid lightgrey;
 }
 

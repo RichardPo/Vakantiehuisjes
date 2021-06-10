@@ -25,18 +25,16 @@ class DetailController extends Controller
 
         if (isset($_GET["id"])) {
             $houseId = $_GET["id"];
-            $foundHouses = $this->accommodation = $this->house->GetHouseById($houseId);
-            if (count($foundHouses) > 0) {
-                $accommodation = $foundHouses[0];
-
+            $foundHouse = $this->house->GetHouseById($houseId);
+            if ($foundHouse != null) {
                 if (isset($_POST["book"])) {
-                    $this->Book($houseId, $accommodation["capacity"]);
+                    $this->Book($houseId);
                 } else if (isset($_POST["review"])) {
                     $this->PostReview($houseId);
                 }
 
                 $this->view = "Accommodation.php";
-                $this->data["house"] = $accommodation;
+                $this->data["house"] = $foundHouse;
                 $this->data["files"] = $this->house->GetHouseFilesByHouseId($houseId);
                 $this->data["reviews"] = $this->review->GetAllByHouseId($houseId);
                 $this->RenderView();
@@ -66,28 +64,35 @@ class DetailController extends Controller
         }
     }
 
-    private function Book($houseId, $houseCapacity)
+    private function Book($houseId)
     {
         $personAmount = $_POST["numberOfPersons"];
         $fromDate = $_POST["fromDate"];
         $toDate = $_POST["toDate"];
         $remarks = $_POST["remarks"];
 
-        $currentUser = $this->user->GetCurrentUser();
-        if ($currentUser != null) {
-            if ($personAmount <= $houseCapacity) {
-                $userId = $currentUser["id"];
+        $fromDateTimeStamp = strtotime($fromDate);
+        $toDateTimeStamp = strtotime($toDate);
 
-                if ($this->booking->AddBooking($houseId, $userId, $fromDate, $toDate, $personAmount, $remarks)) {
-                    $this->data["message"] = "Je booking wordt verwerkt!";
+        if (($toDateTimeStamp > $fromDateTimeStamp) && ($fromDateTimeStamp > time())) {
+            $currentUser = $this->user->GetCurrentUser();
+            if ($currentUser != null) {
+                if ($this->house->IsHouseAvailable($houseId, $personAmount, $fromDate, $toDate)) {
+                    $userId = $currentUser["id"];
+
+                    if ($this->booking->AddBooking($houseId, $userId, $fromDate, $toDate, $personAmount, $remarks)) {
+                        $this->data["message"] = "Je booking wordt verwerkt!";
+                    } else {
+                        $this->data["message"] = "Er ging iets mis bij het booken van deze accommodatie. Probeer het nog een keer.";
+                    }
                 } else {
-                    $this->data["message"] = "Er ging iets mis bij het booken van deze accommodatie. Probeer het nog een keer.";
+                    $this->data["message"] = "De booking kon niet worden gemaakt omdat deze accommodatie niet beschikbaar is.";
                 }
             } else {
-                $this->data["message"] = "De booking kon niet worden gemaakt omdat de capaciteit van deze acccommodatie niet voldoet.";
+                $this->data["message"] = "Je moet ingelogd zijn om een accommodatie te booken.";
             }
         } else {
-            $this->data["message"] = "Je moet ingelogd zijn om een accommodatie te booken.";
+            $this->data["message"] = "Je kunt alleen een huisje booken voor in de toekomst. Zorg er ook voor dat de begindatum vroeger is dan de einddatum.";
         }
     }
 }
