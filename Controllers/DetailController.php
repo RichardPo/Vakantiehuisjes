@@ -54,13 +54,18 @@ class DetailController extends Controller
         if ($currentUser != null) {
             $userId = $currentUser["id"];
 
-            if ($this->review->PostReview($houseId, $userId, $rating, $title, $review) == false) {
-                $this->data["message"] = "Er ging iets mis bij het posten van je review. Probeer het nog een keer.";
+            if ($this->review->CanUserPostReview($houseId, $userId)) {
+
+                if ($this->review->PostReview($houseId, $userId, $rating, $title, $review) == false) {
+                    $this->data["reviewMessage"] = "Er ging iets mis bij het posten van je review. Probeer het nog een keer.";
+                } else {
+                    $this->data["reviewMessage"] = "Je review is gepost!";
+                }
             } else {
-                $this->data["message"] = "Je review is gepost!";
+                $this->data["reviewMessage"] = "Je kan geen reviews plaatsen bij accommodaties die je niet bezocht hebt.";
             }
         } else {
-            $this->data["message"] = "Je moet ingelogd zijn om een review achter te laten.";
+            $this->data["reviewMessage"] = "Je moet ingelogd zijn om een review achter te laten.";
         }
     }
 
@@ -81,18 +86,18 @@ class DetailController extends Controller
                     $userId = $currentUser["id"];
 
                     if ($this->booking->AddBooking($houseId, $userId, $fromDate, $toDate, $personAmount, $remarks)) {
-                        $this->data["message"] = "Je booking wordt verwerkt!";
+                        $this->data["bookingMessage"] = "Je booking wordt verwerkt!";
                     } else {
-                        $this->data["message"] = "Er ging iets mis bij het booken van deze accommodatie. Probeer het nog een keer.";
+                        $this->data["bookingMessage"] = "Er ging iets mis bij het booken van deze accommodatie. Probeer het nog een keer.";
                     }
                 } else {
-                    $this->data["message"] = "De booking kon niet worden gemaakt omdat deze accommodatie niet beschikbaar is.";
+                    $this->data["bookingMessage"] = "De booking kon niet worden gemaakt omdat deze accommodatie niet beschikbaar is.";
                 }
             } else {
-                $this->data["message"] = "Je moet ingelogd zijn om een accommodatie te booken.";
+                $this->data["bookingMessage"] = "Je moet ingelogd zijn om een accommodatie te booken.";
             }
         } else {
-            $this->data["message"] = "Je kunt alleen een huisje booken voor in de toekomst. Zorg er ook voor dat de begindatum vroeger is dan de einddatum.";
+            $this->data["bookingMessage"] = "Je kan alleen een accommodatie booken voor in de toekomst. Zorg er ook voor dat de begindatum vroeger is dan de einddatum.";
         }
     }
 }

@@ -78,7 +78,7 @@
 
                 <input type="submit" name="book" value="Boeken" /><br>
 
-                <?= empty($message) ? "" : $message ?>
+                <?= empty($bookingMessage) ? "" : $bookingMessage ?>
             </form>
         </div>
     </div>
@@ -100,7 +100,7 @@
 
                 <input type="submit" name="review" value="Posten" /><br>
 
-                <?= empty($message) ? "" : $message ?>
+                <?= empty($reviewMessage) ? "" : $reviewMessage ?>
             </form>
         </div>
     </div>

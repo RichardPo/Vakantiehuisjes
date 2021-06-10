@@ -28,4 +28,20 @@ class Review extends Model
 
         return $this->Query("INSERT INTO reviews (rating, title, review, house_id, user_id) VALUES ('$rating', '$title', '$review', '$houseId', '$userId')");
     }
+
+    public function CanUserPostReview($houseId, $userId)
+    {
+        $houseId = $this->ValidateInput($houseId);
+        $userId = $this->ValidateInput($userId);
+
+        $matchingBookings = $this->MakeArray($this->Query("SELECT * FROM bookings WHERE house_id='$houseId' AND user_id='$userId' AND status='Goedgekeurd'"));
+
+        foreach ($matchingBookings as $booking) {
+            if (strtotime($booking["end_date"]) < time()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
