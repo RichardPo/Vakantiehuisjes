@@ -1,1 +1,1 @@
-1. Make sure user can only write reviews when they visited a accommodation earlier (in real life).
+1. Start developing admin-panel.

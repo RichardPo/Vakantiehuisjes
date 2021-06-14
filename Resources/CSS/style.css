@@ -32,7 +32,7 @@ body {
     background-size: cover;
     position: absolute;
     top: 0;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .banner.home {
@@ -91,6 +91,7 @@ body {
     position: absolute;
     padding: 20px;
     min-height: 80%;
+    overflow-x: hidden;
 }
 
 .main.home {
@@ -232,18 +233,26 @@ h1 {
     display: block;
 }
 
-.houses a:last-child {
-    border-bottom: 1px solid lightgrey;
-}
-
 .house {
     width: 100%;
     height: fit-content;
     min-height: 80px;
     padding: 10px;
     box-sizing: border-box;
-    border-top: 1px solid lightgrey;
-    cursor: pointer;
+    box-shadow: 0px 0px 5px 0px rgb(224, 224, 224);
+    margin: 20px 0px 20px 0px;
+    border-radius: 5px;
+    position: relative;
+    transform: rotateX(180deg) scale(0);
+}
+
+.slide {
+    -webkit-animation-name: slide;
+    animation-name: slide;
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
 }
 
 .house .picture {
@@ -384,6 +393,24 @@ h1 {
     }
     to {
         opacity: 1
+    }
+}
+
+@-webkit-keyframes slide {
+    from {
+        transform: rotateX(180deg) scale(0);
+    }
+    to {
+        transform: rotateX(0deg) scale(1);
+    }
+}
+
+@keyframes slide {
+    from {
+        transform: rotateX(180deg) scale(0);
+    }
+    to {
+        transform: rotateX(0deg) scale(1);
     }
 }
 

@@ -20,6 +20,13 @@ class House extends Model
         }
     }
 
+    public function GetAllByOwnerId($id)
+    {
+        $id = $this->ValidateInput($id);
+
+        return $this->MakeArray($this->Query("SELECT * FROM houses WHERE user_id='$id'"));
+    }
+
     public function GetAllByTitle($name)
     {
         $name = $this->ValidateInput($name);

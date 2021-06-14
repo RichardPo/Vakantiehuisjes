@@ -13,7 +13,8 @@ class Router
         "search" => "AccommodationController",
         "account" => "AccountController",
         "accommodations" => "AccommodationController",
-        "accommodation" => "DetailController"
+        "accommodation" => "DetailController",
+        "owner" => "OwnerController"
     ];
 
     public function __construct($url)
