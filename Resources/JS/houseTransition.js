@@ -6,8 +6,8 @@ function HouseAnimation() {
         var house = houses[houseIndex];
 
         if (house) {
-            house.firstElementChild.classList.add("slide");
-            house.firstElementChild.addEventListener("animationend", () => {
+            house.classList.add("slide");
+            house.addEventListener("animationend", () => {
                 HouseAnimation();
             });
 

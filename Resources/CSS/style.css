@@ -27,8 +27,8 @@ body {
 .banner {
     width: 100%;
     height: 150px;
-    background-image: url(https://cdn.pling.com/img/c/b/b/1/fde71ca72ef854432333eb8fad3ff1e15e35.jpg);
-    background-position: center;
+    /** background-image: url(https://cdn.pling.com/img/c/b/b/1/fde71ca72ef854432333eb8fad3ff1e15e35.jpg); **/
+    background-image: url(https://static.vecteezy.com/ti/vetor-gratis/p3/2042709-mar-por-do-sol-com-nuvens-vetor.jpg);
     background-size: cover;
     position: absolute;
     top: 0;
@@ -37,6 +37,7 @@ body {
 
 .banner.home {
     height: 300px;
+    background-position: center;
 }
 
 .header {
@@ -227,12 +228,6 @@ h1 {
     width: 100%;
 }
 
-.houses a {
-    text-decoration: none;
-    color: black;
-    display: block;
-}
-
 .house {
     width: 100%;
     height: fit-content;
@@ -262,6 +257,7 @@ h1 {
     background-color: lightgrey;
     background-position: center;
     background-size: cover;
+    cursor: pointer;
 }
 
 .house .text {
@@ -280,6 +276,22 @@ h1 {
 .house-persons i {
     font-size: 15px;
     color: #404040;
+}
+
+.house-actions {
+    float: right;
+}
+
+.house-actions i {
+    cursor: pointer;
+}
+
+.house-actions .edit {
+    margin-right: 10px;
+}
+
+.house-actions .delete {
+    color: #e88282;
 }
 
 .house-main {
@@ -378,6 +390,11 @@ h1 {
     animation-duration: 1.5s;
 }
 
+.delete-btn {
+    padding-right: 40px;
+    padding-left: 40px;
+}
+
 @-webkit-keyframes fade {
     from {
         opacity: .4
@@ -435,6 +452,53 @@ h1 {
     color: #404040;
 }
 
+.featured-houses {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    background-color: white;
+}
+
+.featured-house {
+    flex-grow: 3;
+    margin: 20px;
+    border-radius: 10px;
+    padding: 15px;
+    box-sizing: border-box;
+    width: 33%;
+    position: relative;
+}
+
+.f-title {
+    font-size: 20px;
+    color: white;
+    position: absolute;
+    z-index: 1;
+}
+
+.f-image {
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: inherit;
+}
+
+.foreground {
+    background-color: rgb(74 31 92);
+    opacity: 0.4;
+}
+
+.f-button {
+    position: absolute;
+    bottom: 5px;
+}
+
 @media only screen and (min-width: 900px) {
     .banner {
         height: 80px;
@@ -445,10 +509,10 @@ h1 {
         margin-left: 15%;
     }
     .banner.home {
-        height: 80%;
+        height: 60%;
     }
     .main.home {
-        top: 80%;
+        top: 60%;
     }
     .curve {
         display: none;
@@ -458,5 +522,11 @@ h1 {
     }
     .mySlides:hover .img {
         transform: scale(1.1);
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .featured-houses {
+        display: none;
     }
 }

@@ -55,7 +55,6 @@ class DetailController extends Controller
             $userId = $currentUser["id"];
 
             if ($this->review->CanUserPostReview($houseId, $userId)) {
-
                 if ($this->review->PostReview($houseId, $userId, $rating, $title, $review) == false) {
                     $this->data["reviewMessage"] = "Er ging iets mis bij het posten van je review. Probeer het nog een keer.";
                 } else {
