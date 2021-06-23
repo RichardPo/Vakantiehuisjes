@@ -2,7 +2,7 @@
 
 class Model
 {
-    private $connection;
+    protected $connection;
     private $server = "localhost";
     private $username = "root";
     private $password = "";

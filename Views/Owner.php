@@ -14,24 +14,13 @@
 
                 foreach ($houses as $house) :
                 ?>
-                    <div class="house">
-                        <div class="picture" style="background-image: url(<?= $files[$house['id']] ?>);" onclick="window.location = 'accommodation?id=<?= $house['id'] ?>';"></div>
-                        <div class="text">
-                            <div class="house-header">
-                                <div class="house-title"><?= $house["title"]; ?></div>
-                                <div class="house-info">
-                                    <div class="house-actions">
-                                        <i class="fas fa-edit edit" onclick="window.location = 'owner?edit_id=<?= $house['id'] ?>';"></i>
-                                        <i class="fas fa-trash-alt delete" onclick="window.location = 'owner?delete_id=<?= $house['id'] ?>';"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="house-main">
-                                <div class="house-description">
-                                    <?= $house["description"]; ?>
-                                </div>
-                            </div>
+                    <div class="house" style="background-image: url(<?= $files[$house['id']] ?>);">
+                        <div class="house-title"><?= $house["title"]; ?></div>
+                        <div class="house-actions center">
+                            <div class="edit" onclick="window.location = 'owner?edit_id=<?= $house['id'] ?>'"><i class="fas fa-edit"></i></div>
+                            <div class="delete" onclick="window.location = 'owner?delete_id=<?= $house['id'] ?>'"><i class="fas fa-trash-alt"></i></div>
                         </div>
+                        <button class="house-button">Bekijken &#10095;</button>
                     </div>
                 <?php endforeach; ?>
             </div>

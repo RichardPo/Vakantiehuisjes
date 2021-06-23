@@ -1,7 +1,6 @@
 <?php include "Resources/Includes/header.inc.php"; ?>
 
 <div class="main">
-    <h1>Accomodaties</h1>
     <div class="houses">
         <?php
         if (count($houses) == 0) {
@@ -10,21 +9,10 @@
 
         foreach ($houses as $house) :
         ?>
-            <div class="house">
-                <div class="picture" style="background-image: url(<?= $files[$house['id']] ?>);" onclick="window.location = 'accommodation?id=<?= $house['id'] ?>';"></div>
+            <div class="house" style="background-image: url(<?= $files[$house['id']] ?>);">
                 <div class="text">
-                    <div class="house-header">
-                        <div class="house-title"><?= $house["title"]; ?></div>
-                        <div class="house-info">
-                            € <?= $house["price"]; ?> p.p.p.n.
-                            <span class="house-persons"><i class="fas fa-user"></i> <?= $house["capacity"] ?></span>
-                        </div>
-                    </div>
-                    <div class="house-main">
-                        <div class="house-description">
-                            <?= $house["description"]; ?>
-                        </div>
-                    </div>
+                    <div class="house-title"><?= $house["title"]; ?></div>
+                    <button class="house-button" onclick="window.location = 'accommodation?id=<?= $house['id'] ?>';">Bekijken &#10095;</button>
                 </div>
             </div>
         <?php endforeach; ?>

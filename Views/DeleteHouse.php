@@ -7,7 +7,7 @@
         </div>
         <div class="block-main">
             <form method="post" action="owner" class="center">
-                <button type="submit" class="delete-btn" name="delete_id" value="<?= $_GET['delete_id']; ?>">Ja</button>
+                <button type="submit" class="delete-btn" name="delete_id" value="<?= $id ?>">Ja</button>
                 <?= isset($message) ? $message : "" ?>
             </form>
         </div>

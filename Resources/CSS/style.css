@@ -92,7 +92,6 @@ body {
     position: absolute;
     padding: 20px;
     min-height: 80%;
-    overflow-x: hidden;
 }
 
 .main.home {
@@ -224,74 +223,56 @@ h1 {
 }
 
 .houses {
-    margin-top: 20px;
     width: 100%;
+    position: relative;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 250px);
+    grid-gap: 20px;
+    background-color: white;
+    padding: 10px;
 }
 
 .house {
-    width: 100%;
-    height: fit-content;
-    min-height: 80px;
-    padding: 10px;
-    box-sizing: border-box;
-    box-shadow: 0px 0px 5px 0px rgb(224, 224, 224);
-    margin: 20px 0px 20px 0px;
-    border-radius: 5px;
+    width: 250px;
+    height: 250px;
     position: relative;
-    transform: rotateX(180deg) scale(0);
-}
-
-.slide {
-    -webkit-animation-name: slide;
-    animation-name: slide;
-    -webkit-animation-duration: 0.3s;
-    animation-duration: 0.3s;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-}
-
-.house .picture {
-    float: left;
-    height: 60px;
-    width: 60px;
-    background-color: lightgrey;
-    background-position: center;
+    box-sizing: border-box;
+    background-color: white;
     background-size: cover;
-    cursor: pointer;
-}
-
-.house .text {
-    margin-left: 80px;
-    width: calc(100% - 80px);
+    background-position: center;
+    padding: 10px;
+    border-radius: 15px;
 }
 
 .house-title {
     font-size: 18px;
+    color: white;
 }
 
-.house-persons {
-    float: right;
-}
-
-.house-persons i {
-    font-size: 15px;
-    color: #404040;
+.house-button {
+    position: absolute;
+    bottom: 5px;
 }
 
 .house-actions {
-    float: right;
+    margin-top: 5px;
+    background-color: white;
+    padding: 5px;
+    box-sizing: initial;
+    border-radius: 15px;
+    width: fit-content;
+    height: 30px;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    margin-bottom: 10px;
 }
 
-.house-actions i {
+.house-actions .edit, .house-actions .delete {
+    margin: 0px 10px 0px 10px;
+    color: black;
     cursor: pointer;
-}
-
-.house-actions .edit {
-    margin-right: 10px;
-}
-
-.house-actions .delete {
-    color: #e88282;
 }
 
 .house-main {
@@ -497,6 +478,10 @@ h1 {
 .f-button {
     position: absolute;
     bottom: 5px;
+}
+
+.house-button {
+    width: fit-content;
 }
 
 @media only screen and (min-width: 900px) {

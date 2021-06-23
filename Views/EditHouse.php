@@ -2,8 +2,8 @@
 
 <div class="main center">
     <div>
-        <form action="owner" method="post" enctype="multipart/form-data">
-            <h1>Accommodatie toevoegen</h1>
+        <form action="owner" method="post">
+            <h1>Accommodatie bewerken</h1>
 
             <label>Naam</label>
             <input type="text" name="title" />
@@ -15,9 +15,6 @@
                 <option value="tent">Tent</option>
                 <option value="hotel">Hotel</option>
             </select>
-
-            <label>Afbeeldingen</label>
-            <input type="file" name="pictures[]" multiple />
 
             <label>Capaciteit</label>
             <input type="number" name="capacity" />
@@ -34,7 +31,7 @@
             <label>Beschrijving</label>
             <textarea name="description"></textarea>
 
-            <input type="submit" name="add" value="Toevoegen" />
+            <button type="submit" name="edit_id" value="<?= $id ?>">Bewerken</button><br>
 
             <?= isset($message) ? $message : "" ?>
         </form>

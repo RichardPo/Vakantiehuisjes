@@ -131,15 +131,37 @@ class House extends Model
         $city = $this->ValidateInput($city);
         $description = $this->ValidateInput($description);
 
-        return $this->Query("INSERT INTO houses (title, type, capacity, price, country, city, description, user_id) VALUES ('$title', '$type', '$capacity', '$price', '$country', '$city', '$description', '$userId')");
+        if ($this->Query("INSERT INTO houses (title, type, capacity, price, country, city, description, user_id) VALUES ('$title', '$type', '$capacity', '$price', '$country', '$city', '$description', '$userId')")) {
+            return mysqli_insert_id($this->connection);
+        } else {
+            return false;
+        }
     }
 
-    public function EditHouse($id)
+    public function EditHouse($id, $title, $type, $capacity, $price, $country, $city, $description)
     {
+        $id = $this->ValidateInput($id);
+        $title = $this->ValidateInput($title);
+        $type = $this->ValidateInput($type);
+        $capacity = $this->ValidateInput($capacity);
+        $price = $this->ValidateInput($price);
+        $country = $this->ValidateInput($country);
+        $city = $this->ValidateInput($city);
+        $description = $this->ValidateInput($description);
+
+        return $this->Query("UPDATE houses SET title='$title', type='$type', capacity='$capacity', price='$price', country='$country', city='$city', description='$description' WHERE id='$id'");
     }
 
     public function DeleteHouse($id)
     {
         return $this->Query("DELETE FROM houses WHERE id='$id'");
+    }
+
+    public function AddHouseFile($houseId, $filePath, $fileType)
+    {
+        $filePath = $this->ValidateInput($filePath);
+        $fileType = $this->ValidateInput($fileType);
+
+        return $this->Query("INSERT INTO files (path, type, house_id) VALUES ('$filePath', '$fileType', '$houseId')");
     }
 }
