@@ -21,12 +21,12 @@
                             <div class="edit" onclick="window.location = 'owner?edit&id=<?= $house['id'] ?>'"><i class="fas fa-edit"></i></div>
                             <div class="delete" onclick="window.location = 'owner?delete&id=<?= $house['id'] ?>'"><i class="fas fa-trash-alt"></i></div>
                         </div>
-                        <button class="house-button">Bekijken &#10095;</button>
+                        <button class="house-button" onclick="window.location = 'accommodation?id=<?= $house['id'] ?>';">Bekijken &#10095;</button>
                     </div>
                 <?php endforeach; ?>
             </div>
 
-            <form>
+            <form class="center">
                 <button type="submit" name="add" value="true">Accommodatie toevoegen</button>
             </form>
         </div>

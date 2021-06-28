@@ -16,6 +16,14 @@
                 <button type="submit" name="edit" value="true">Account bewerken</button>
             </form>
 
+            <?php
+            if ($role == "verhuurder") :
+            ?>
+                <form action="owner">
+                    <button type="submit">Mijn verhuurderspaneel</button>
+                </form>
+            <?php endif; ?>
+
             <form>
                 <button type="submit" name="logout" value="true">Uitloggen</button>
             </form>

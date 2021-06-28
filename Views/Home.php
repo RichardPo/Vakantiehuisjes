@@ -5,35 +5,26 @@
     if (count($popularHouses) == 3) :
     ?>
         <div class="featured-houses">
-            <div class="featured-house">
+            <div class="featured-house" style="background-image: url('<?= $popularHouses[0]['picture'] ?>');">
                 <div class="f-title">
                     <?= $popularHouses[0]["title"] ?> (aanbevolen)
                 </div>
 
-                <div class="f-image" style="background-image: url('<?= $popularHouses[0]['picture'] ?>');"></div>
-                <div class="f-image foreground"></div>
-
                 <button class="f-button" onclick="window.location = 'accommodation?id=<?= $popularHouses[0]['id'] ?>';">Bekijken &#10095;</button>
             </div>
 
-            <div class="featured-house">
+            <div class="featured-house" style="background-image: url('<?= $popularHouses[1]['picture'] ?>');">
                 <div class="f-title">
                     <?= $popularHouses[1]["title"] ?> (aanbevolen)
                 </div>
 
-                <div class="f-image" style="background-image: url(<?= $popularHouses[1]['picture'] ?>);"></div>
-                <div class="f-image foreground"></div>
-
                 <button class="f-button" onclick="window.location = 'accommodation?id=<?= $popularHouses[1]['id'] ?>';">Bekijken &#10095;</button>
             </div>
 
-            <div class="featured-house">
+            <div class="featured-house" style="background-image: url('<?= $popularHouses[2]['picture'] ?>');">
                 <div class="f-title">
                     <?= $popularHouses[2]["title"] ?> (aanbevolen)
                 </div>
-
-                <div class="f-image" style="background-image: url(<?= $popularHouses[2]['picture'] ?>);"></div>
-                <div class="f-image foreground"></div>
 
                 <button class="f-button" onclick="window.location = 'accommodation?id=<?= $popularHouses[2]['id'] ?>';">Bekijken &#10095;</button>
             </div>

@@ -50,6 +50,8 @@ class AccountController extends Controller
                 $this->data["reviews"] = $this->review->GetAllByUserId($userId);
                 $this->data["userInfo"] = $this->user->GetUserInfoByID($userId);
                 $this->data["bookings"] = $this->booking->GetAllBookingsByUserId($userId);
+
+                $this->data["role"] = $this->user->GetUserById($userId)["role"];
             }
         }
 

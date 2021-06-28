@@ -10,7 +10,12 @@ class User extends Model
     public function GetUserById($id)
     {
         $id = $this->ValidateInput($id);
-        return $this->MakeArray($this->Query("SELECT * FROM users WHERE id='$id'"));
+        $users = $this->MakeArray($this->Query("SELECT * FROM users WHERE id='$id'"));
+        if (count($users) > 0) {
+            return $users[0];
+        } else {
+            return null;
+        }
     }
 
     public function GetUserByUsername($username)
