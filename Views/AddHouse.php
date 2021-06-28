@@ -2,7 +2,7 @@
 
 <div class="main center">
     <div>
-        <form action="owner" method="post" enctype="multipart/form-data">
+        <form action="owner" method="post">
             <h1>Accommodatie toevoegen</h1>
 
             <label>Naam</label>
@@ -15,9 +15,6 @@
                 <option value="tent">Tent</option>
                 <option value="hotel">Hotel</option>
             </select>
-
-            <label>Afbeeldingen</label>
-            <input type="file" name="pictures[]" multiple />
 
             <label>Capaciteit</label>
             <input type="number" name="capacity" />

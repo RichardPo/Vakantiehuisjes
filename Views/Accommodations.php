@@ -9,7 +9,7 @@
 
         foreach ($houses as $house) :
         ?>
-            <div class="house" style="background-image: url(<?= $files[$house['id']] ?>);">
+            <div class="house" style="background-image: url('<?= $files[$house['id']] ?>');">
                 <div class="text">
                     <div class="house-title"><?= $house["title"]; ?></div>
                     <button class="house-button" onclick="window.location = 'accommodation?id=<?= $house['id'] ?>';">Bekijken &#10095;</button>

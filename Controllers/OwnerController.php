@@ -14,133 +14,289 @@ class OwnerController extends Controller
         $this->user = new User();
 
         $user = $this->user->GetCurrentUser();
-        if ($user) {
-            if (isset($_GET["add"])) {
-                $this->ShowCreatePanel();
-            } else if (isset($_GET["edit_id"])) {
-                $this->ShowEditPanel();
-            } else if (isset($_GET["delete_id"])) {
-                $this->ShowDeletePanel();
-            } else if (isset($_POST["add"])) {
-                $this->CreateHouse($user);
-            } else if (isset($_POST["edit_id"])) {
-                $this->EditHouse($_POST["edit_id"], $user);
-            } else if (isset($_POST["delete_id"])) {
-                $this->DeleteHouse($_POST["delete_id"], $user);
-            } else {
-                $this->ShowPanel($user);
-            }
 
-            $this->RenderView();
+        if ($user != null) {
+            if ($_POST) {
+                if (isset($_POST["add"])) {
+                    $this->AddHouse(
+                        $_POST["title"],
+                        $_POST["type"],
+                        $_POST["capacity"],
+                        $_POST["country"],
+                        $_POST["city"],
+                        $_POST["price"],
+                        $_POST["description"]
+                    );
+                } else if (isset($_POST["edit"])) {
+                    $this->EditHouse(
+                        $_POST["edit"],
+                        $_POST["title"],
+                        $_POST["type"],
+                        $_POST["capacity"],
+                        $_POST["country"],
+                        $_POST["city"],
+                        $_POST["price"],
+                        $_POST["description"]
+                    );
+                } else if (isset($_POST["pictures"])) {
+                    $this->UploadPictures($_POST["pictures"]);
+                } else if (isset($_POST["delete_picture"])) {
+                    $this->DeletePicture($_POST["delete_picture"], $_POST["house_id"]);
+                } else if (isset($_POST["delete"])) {
+                    $this->DeleteHouse($_POST["delete"]);
+                }
+            } else {
+                if (isset($_GET["add"])) {
+                    $this->data["title"] = "Accommodatie toevoegen";
+                    $this->view = "AddHouse.php";
+                } else if (isset($_GET["edit"])) {
+                    $this->data["title"] = "Accommodatie bewerken";
+                    $this->view = "EditHouse.php";
+
+                    $this->data["id"] = $_GET["id"];
+                } else if (isset($_GET["pictures"])) {
+                    $this->data["title"] = "Afbeeldingen";
+                    $this->view = "HousePictures.php";
+
+                    $this->data["pictures"] = $this->house->GetHouseFilesByHouseId($_GET["id"]);
+                    $this->data["id"] = $_GET["id"];
+                } else if (isset($_GET["delete"])) {
+                    $this->data["title"] = "Accommodatie verwijderen";
+                    $this->view = "DeleteHouse.php";
+
+                    $this->data["id"] = $_GET["id"];
+                } else {
+                    $this->data["title"] = "Verhuurderspaneel";
+                    $this->view = "Owner.php";
+
+                    $accommodations = $this->house->GetAllByOwnerId($user["id"]);
+                    $this->data["houses"] = $accommodations;
+
+                    $files = [];
+                    foreach ($accommodations as $accommodation) {
+                        $files[$accommodation["id"]] = $this->house->GetHousePictureByHouseId($accommodation["id"]);
+                    }
+                    $this->data["files"] = $files;
+                }
+            }
+        } else {
+            header("Location: account");
+        }
+
+        $this->RenderView();
+    }
+
+    private function AddHouse($title, $type, $capacity, $country, $city, $price, $description)
+    {
+        $user = $this->user->GetCurrentUser();
+
+        if ($user != null) {
+            if ($this->house->CreateHouse($title, $type, $capacity, $price, $country, $city, $description, $user["id"])) {
+                header("Location: owner");
+            } else {
+                $this->view = "AddHouse.php";
+                $this->data["title"] = "Accommodatie toevoegen";
+                $this->data["message"] = "Er ging iets mis. Probeer het nog een keer.";
+            }
         } else {
             header("Location: account");
         }
     }
 
-    private function ShowPanel($user)
+    private function EditHouse($id, $title, $type, $capacity, $country, $city, $price, $description)
     {
-        $this->data["title"] = "Verhuurderspaneel";
+        $user = $this->user->GetCurrentUser();
 
-        $accommodations = $this->house->GetAllByOwnerId($user["id"]);
-        $this->data["houses"] = $accommodations;
+        if ($user != null) {
+            $foundHouse = $this->house->GetHouseById($id);
 
-        $files = [];
-        foreach ($accommodations as $accommodation) {
-            $files[$accommodation["id"]] = $this->house->GetHousePictureByHouseId($accommodation["id"]);
-        }
-        $this->data["files"] = $files;
-
-        $this->view = "Owner.php";
-    }
-
-    private function ShowCreatePanel()
-    {
-        $this->view = "AddHouse.php";
-        $this->data["title"] = "Toevoegen";
-    }
-
-    private function ShowEditPanel()
-    {
-        $this->view = "EditHouse.php";
-        $this->data["title"] = "Bewerken";
-        $this->data["id"] = $_GET["edit_id"];
-    }
-
-    private function ShowDeletePanel()
-    {
-        $this->view = "DeleteHouse.php";
-        $this->data["title"] = "Verwijderen";
-        $this->data["id"] = $_GET["delete_id"];
-    }
-
-    private function CreateHouse($user)
-    {
-        $title = $_POST["title"];
-        $type = $_POST["type"];
-        $capacity = $_POST["capacity"];
-        $price = $_POST["price"];
-        $country = $_POST["country"];
-        $city = $_POST["city"];
-        $description = $_POST["description"];
-
-        $insertedHouseId = $this->house->CreateHouse($title, $type, $capacity, $price, $country, $city, $description, $user["id"]);
-
-        if ($insertedHouseId != false) {
-            $this->UploadHousePictures($insertedHouseId);
-
-            header("Location: owner");
+            if ($foundHouse != null) {
+                if ($foundHouse["user_id"] == $user["id"]) {
+                    if ($this->house->EditHouse($id, $title, $type, $capacity, $price, $country, $city, $description)) {
+                        header("Location: owner");
+                    } else {
+                        $this->view = "EditHouse.php";
+                        $this->data["title"] = "Accommodatie toevoegen";
+                        $this->data["message"] = "Er ging iets mis. Probeer het nog een keer.";
+                    }
+                } else {
+                    $this->view = "EditHouse.php";
+                    $this->data["title"] = "Accommodatie toevoegen";
+                    $this->data["message"] = "Je kunt geen accommodaties bewerken van een ander!";
+                }
+            } else {
+                $this->view = "EditHouse.php";
+                $this->data["title"] = "Accommodatie toevoegen";
+                $this->data["message"] = "Er ging iets mis. Probeer het nog een keer.";
+            }
         } else {
-            $this->view = "AddHouse.php";
-            $this->data["message"] = "Er ging iets mis bij het aanmaken van de accommodatie. Zorg dat alle velden ingevuld zijn en probeer het nog een keer.";
-            $this->data["message"] = $this->house->GetError();
+            header("Location: account");
         }
     }
 
-    private function EditHouse($id, $user)
+    private function DeleteHouse($id)
     {
-        $title = $_POST["title"];
-        $type = $_POST["type"];
-        $capacity = $_POST["capacity"];
-        $price = $_POST["price"];
-        $country = $_POST["country"];
-        $city = $_POST["city"];
-        $description = $_POST["description"];
+        $user = $this->user->GetCurrentUser();
 
-        $house = $this->house->GetHouseById($id);
-        if ($house["user_id"] == $user["id"] && $this->house->EditHouse($id, $title, $type, $capacity, $price, $country, $city, $description) && $house != null) {
-            header("Location: owner");
-        } else {
-            $this->view = "EditHouse.php";
-            $this->data["message"] = "Er ging iets mis bij het bewerken van dit huisje. Probeer het nog een keer.";
-        }
-    }
+        if ($user != null) {
+            $foundHouse = $this->house->GetHouseById($id);
 
-    private function DeleteHouse($id, $user)
-    {
-        $house = $this->house->GetHouseById($id);
-        if ($house == null) {
-            $this->view = "DeleteHouse.php";
-            $this->data["message"] = "Er ging iets mis bij het verwijderen van dit huisje. Probeer het nog een keer.";
-        } else {
-            if ($house["user_id"] == $user["id"] && $this->house->DeleteHouse($id)) {
-                header("Location: owner");
+            if ($foundHouse != null) {
+                if ($foundHouse["user_id"] == $user["id"]) {
+                    if ($this->house->DeleteHouse($id)) {
+                        header("Location: owner");
+                    } else {
+                        $this->view = "DeleteHouse.php";
+                        $this->data["title"] = "Accommodatie verwijderen";
+                        $this->data["message"] = "Er ging iets mis. Probeer het nog een keer.";
+                    }
+                } else {
+                    $this->view = "DeleteHouse.php";
+                    $this->data["title"] = "Accommodatie verwijderen";
+                    $this->data["message"] = "Je kunt geen accommodaties van anderen verwijderen.";
+                }
             } else {
                 $this->view = "DeleteHouse.php";
-                $this->data["message"] = "Er ging iets mis bij het verwijderen van dit huisje. Probeer het nog een keer.";
+                $this->data["title"] = "Accommodatie verwijderen";
+                $this->data["message"] = "Er ging iets mis. Probeer het nog een keer.";
+            }
+        } else {
+            header("Location: account");
+        }
+    }
+
+    private function UploadPictures($id)
+    {
+        $user = $this->user->GetCurrentUser();
+
+        if ($user != null) {
+            $foundHouse = $this->house->GetHouseById($id);
+
+            if ($foundHouse != null) {
+                if ($foundHouse["user_id"] != $user["id"]) {
+                    $this->view = "Error.php";
+                    $this->data["title"] = "Fout opgetreden";
+
+                    $this->data["message"] = "Je kan geen bestanden uploaden voor accommodaties van anderen.";
+
+                    return;
+                }
+            } else {
+                $this->view = "Error.php";
+                $this->data["title"] = "Fout opgetreden";
+
+                $this->data["message"] = "Je kan geen bestanden uploaden voor accommodaties die niet bestaan.";
+
+                return;
+            }
+        } else {
+            header("Location: account");
+
+            return;
+        }
+
+        $fileCount = count($_FILES["fileToUpload"]["name"]);
+
+        if ($fileCount > 0) {
+            $target_dir = "static/";
+
+            for ($i = 0; $i < $fileCount; $i++) {
+                $target_file = $target_dir . basename("/" . uniqid("accommodation_picture_") . "." . strtolower(pathinfo($_FILES["fileToUpload"]["name"][$i], PATHINFO_EXTENSION)));
+                $uploadOk = 1;
+                $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+                // Check if image file is a actual image or fake image
+                $check = getimagesize($_FILES["fileToUpload"]["tmp_name"][$i]);
+                if ($check !== false) {
+                    $uploadOk = 1;
+                } else {
+                    $uploadOk = 0;
+                }
+
+                // Check if file already exists
+                if (file_exists($target_file)) {
+                    $uploadOk = 0;
+                }
+
+                // Check file size
+                if ($_FILES["fileToUpload"]["size"][$i] > 500000) {
+                    $uploadOk = 0;
+                }
+
+                // Allow certain file formats
+                if (
+                    $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                    && $imageFileType != "gif"
+                ) {
+                    $uploadOk = 0;
+                }
+
+                // Check if $uploadOk is set to 0 by an error
+                if ($uploadOk == 0) {
+                    $this->view = "Error.php";
+                    $this->data["title"] = "Fout opgetreden";
+
+                    $this->data["message"] = "Het bestand kon niet geupload worden.";
+                } else {
+                    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"][$i], $target_file)) {
+                        $this->house->AddHouseFile($id, $target_file, "IMG");
+
+                        header("Location: owner");
+                    } else {
+                    }
+                }
             }
         }
     }
 
-    private function UploadHousePictures($houseId)
+    private function DeletePicture($id, $houseId)
     {
-        $countfiles = count($_FILES['pictures']['name']);
+        $user = $this->user->GetCurrentUser();
 
-        for ($i = 0; $i < $countfiles; $i++) {
-            $filename = basename($_FILES['pictures']['name'][$i]);
+        if ($user != null) {
+            $foundHouse = $this->house->GetHouseById($houseId);
 
-            if (!move_uploaded_file($_FILES['pictures']['tmp_name'][$i], SITE_ROOT . '/static/' . $filename) || !$this->house->AddHouseFile($houseId, '/static/' . $filename, "IMG")) {
-                $err = true;
+            if ($foundHouse != null) {
+                if ($foundHouse["user_id"] != $user["id"]) {
+                    $this->view = "Error.php";
+                    $this->data["title"] = "Fout opgetreden";
+
+                    $this->data["message"] = "Je kan geen bestanden verwijderen voor accommodaties van anderen.";
+
+                    return;
+                }
+            } else {
+                $this->view = "Error.php";
+                $this->data["title"] = "Fout opgetreden";
+
+                $this->data["message"] = "Je kan geen bestanden verwijderen voor accommodaties die niet bestaan.";
+
+                return;
             }
+        } else {
+            header("Location: account");
+
+            return;
+        }
+
+        $file = $this->house->GetHouseFileByFileId($id);
+        if ($file != null) {
+            $path = $file["path"];
+            if (unlink($path)) {
+                $this->house->DeleteHouseFile($id);
+
+                header("Location: owner");
+            } else {
+                $this->view = "Error.php";
+                $this->data["title"] = "Fout opgetreden";
+
+                $this->data["message"] = "Het bestand kon niet worden verwijderd.";
+            }
+        } else {
+            $this->view = "Error.php";
+            $this->data["title"] = "Fout opgetreden";
+
+            $this->data["message"] = "Dit bestand bestaat niet.";
         }
     }
 }

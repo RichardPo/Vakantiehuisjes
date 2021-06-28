@@ -14,11 +14,12 @@
 
                 foreach ($houses as $house) :
                 ?>
-                    <div class="house" style="background-image: url(<?= $files[$house['id']] ?>);">
+                    <div class="house" style="background-image: url('<?= $files[$house['id']] ?>');">
                         <div class="house-title"><?= $house["title"]; ?></div>
                         <div class="house-actions center">
-                            <div class="edit" onclick="window.location = 'owner?edit_id=<?= $house['id'] ?>'"><i class="fas fa-edit"></i></div>
-                            <div class="delete" onclick="window.location = 'owner?delete_id=<?= $house['id'] ?>'"><i class="fas fa-trash-alt"></i></div>
+                            <div class="pictures" onclick="window.location = 'owner?pictures&id=<?= $house['id'] ?>'"><i class="fas fa-images"></i></div>
+                            <div class="edit" onclick="window.location = 'owner?edit&id=<?= $house['id'] ?>'"><i class="fas fa-edit"></i></div>
+                            <div class="delete" onclick="window.location = 'owner?delete&id=<?= $house['id'] ?>'"><i class="fas fa-trash-alt"></i></div>
                         </div>
                         <button class="house-button">Bekijken &#10095;</button>
                     </div>

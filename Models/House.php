@@ -59,6 +59,19 @@ class House extends Model
         return array_slice($housesWithAVGRatings, 0, $amount);
     }
 
+    public function GetHouseFileByFileId($id)
+    {
+        $id = $this->ValidateInput($id);
+
+        $foundFiles = $this->MakeArray($this->Query("SELECT * FROM files WHERE id='$id'"));
+
+        if (count($foundFiles) > 0) {
+            return $foundFiles[0];
+        } else {
+            return null;
+        }
+    }
+
     public function GetHouseFilesByHouseId($id)
     {
         $id = $this->ValidateInput($id);
@@ -163,5 +176,10 @@ class House extends Model
         $fileType = $this->ValidateInput($fileType);
 
         return $this->Query("INSERT INTO files (path, type, house_id) VALUES ('$filePath', '$fileType', '$houseId')");
+    }
+
+    public function DeleteHouseFile($id)
+    {
+        return $this->Query("DELETE FROM files WHERE id='$id'");
     }
 }

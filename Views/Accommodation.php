@@ -12,7 +12,7 @@
             ?>
 
                 <div class="mySlides fade">
-                    <div class="img" style="background-image: url(<?= $file['path'] ?>);"></div>
+                    <div class="img" style="background-image: url('<?= $file['path'] ?>');"></div>
                 </div>
 
             <?php

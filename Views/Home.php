@@ -10,7 +10,7 @@
                     <?= $popularHouses[0]["title"] ?> (aanbevolen)
                 </div>
 
-                <div class="f-image" style="background-image: url(<?= $popularHouses[0]['picture'] ?>);"></div>
+                <div class="f-image" style="background-image: url('<?= $popularHouses[0]['picture'] ?>');"></div>
                 <div class="f-image foreground"></div>
 
                 <button class="f-button" onclick="window.location = 'accommodation?id=<?= $popularHouses[0]['id'] ?>';">Bekijken &#10095;</button>

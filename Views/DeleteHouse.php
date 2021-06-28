@@ -7,9 +7,9 @@
         </div>
         <div class="block-main">
             <form method="post" action="owner" class="center">
-                <button type="submit" class="delete-btn" name="delete_id" value="<?= $id ?>">Ja</button>
-                <?= isset($message) ? $message : "" ?>
+                <button type="submit" class="delete-btn" name="delete" value="<?= $id ?>">Ja</button>
             </form>
+            <?= isset($message) ? $message : "" ?>
         </div>
     </div>
 </div>

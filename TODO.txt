@@ -1,2 +1,1 @@
-1. Start developing admin-panel.
-2. Make sure that user cant submit unfilled forms.
+1. Make sure that user cant submit unfilled forms.

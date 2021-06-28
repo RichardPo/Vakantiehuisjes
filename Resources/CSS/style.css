@@ -269,7 +269,7 @@ h1 {
     margin-bottom: 10px;
 }
 
-.house-actions .edit, .house-actions .delete {
+.house-actions div {
     margin: 0px 10px 0px 10px;
     color: black;
     cursor: pointer;
@@ -482,6 +482,34 @@ h1 {
 
 .house-button {
     width: fit-content;
+}
+
+.accommodation-pictures {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.accommodation-picture {
+    max-width: 100%;
+    width: 300px;
+    aspect-ratio: 1920 / 1080;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    margin: 20px;
+}
+
+.picture-actions {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.picture-actions form, .picture-actions button {
+    margin: 0;
 }
 
 @media only screen and (min-width: 900px) {

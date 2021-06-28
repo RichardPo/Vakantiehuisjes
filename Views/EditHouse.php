@@ -31,7 +31,7 @@
             <label>Beschrijving</label>
             <textarea name="description"></textarea>
 
-            <button type="submit" name="edit_id" value="<?= $id ?>">Bewerken</button><br>
+            <button type="submit" name="edit" value="<?= $id ?>">Bewerken</button><br>
 
             <?= isset($message) ? $message : "" ?>
         </form>
